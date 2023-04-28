@@ -1,7 +1,27 @@
 services:
+  mongo:
+    image: mongo:5
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD
+    ports:
+      - 27017:27017
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME
+      - ME_CONFIG_MONGODB_ADMINPASSWORD
+      - ME_CONFIG_MONGODB_URL
+
   # Back end for dramatiq and found ip cache
   redis:
     image: redislabs/rejson
+
   worker:
     build: .
     environment:
@@ -10,6 +30,7 @@ services:
     depends_on:
       - redis
     command: dramatiq dramatiq_actors:redis_broker
+
   scanner:
     build: .
     environment:
