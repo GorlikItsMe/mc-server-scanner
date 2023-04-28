@@ -1,9 +1,11 @@
 services:
   redis:
     image: redislabs/rejson
+    restart: always
 
   worker:
     build: .
+    restart: always
     environment:
       - MONGO_URI
       - IDENT
@@ -13,6 +15,7 @@ services:
 
   scanner:
     build: .
+    restart: always
     environment:
       - RATE
       - MONGO_URI
