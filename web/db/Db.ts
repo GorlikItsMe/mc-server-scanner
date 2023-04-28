@@ -1,14 +1,17 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 class DB {
-	static URI = process.env.MONGO_URI as string;
+  static URI = process.env.MONGO_URI as string;
 
-	constructor() {}
+  constructor() {}
 
-	connect = async () => {
-		mongoose.connect(DB.URI);
-		return mongoose.connection;
-	};
+  connect = async () => {
+    mongoose.connect(DB.URI, {
+      dbName: "scanned",
+      autoCreate: true,
+    });
+    return mongoose.connection;
+  };
 }
 
 export default DB;
