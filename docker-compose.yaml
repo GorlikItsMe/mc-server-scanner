@@ -1,0 +1,20 @@
+services:
+  # Back end for dramatiq and found ip cache
+  redis:
+    image: redislabs/rejson
+  worker:
+    build: .
+    environment:
+      - MONGO_URI
+      - IDENT
+    depends_on:
+      - redis
+    command: dramatiq dramatiq_actors:redis_broker
+  scanner:
+    build: .
+    environment:
+      - RATE
+      - MONGO_URI
+    depends_on:
+      - worker
+    command: python3 -m scanner
