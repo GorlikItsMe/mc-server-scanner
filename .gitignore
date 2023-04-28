@@ -7,3 +7,5 @@ src/res.json
 paused.conf
 .env
 .DS_Store
+
+src/.venv
