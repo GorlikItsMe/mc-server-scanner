@@ -8,6 +8,7 @@ class DB {
   connect = async () => {
     mongoose.connect(DB.URI, {
       dbName: "scanned",
+      autoIndex: true,
       autoCreate: true,
     });
     return mongoose.connection;
