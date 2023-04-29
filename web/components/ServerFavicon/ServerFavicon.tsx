@@ -10,7 +10,8 @@ const ServerFavicon = ({
 	hasCustomFavicon: boolean;
 	favicon: string;
 }) => {
-	const [show, setShow] = useState(!hasCustomFavicon);
+	// const [show, setShow] = useState(!hasCustomFavicon);
+	const [show, setShow] = useState(true);
 
 	const onClick = (show: boolean) => {
 		// Remember the show state across pages
